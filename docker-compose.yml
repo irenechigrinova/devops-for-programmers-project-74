@@ -1,8 +1,8 @@
 version: '3'
 services:
   app:
+    image: ichigrinova/devops-for-programmers-project-74
     build:
       context: .
-    volumes:
-      - ./app:/app
+      dockerfile: ./Dockerfile.production
     command: npm test
