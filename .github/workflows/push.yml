@@ -24,6 +24,8 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v3
+        run:
+          echo 'tags: ${{ steps.meta.outputs.tags }}'
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
@@ -39,7 +41,6 @@ jobs:
         with:
           context: .
           load: true
-          file: Dockerfile.production
           cache-from: type=registry,ref=${{ env.APP_NAME }}:buildcache
           cache-to: type=registry,ref=${{ env.APP_NAME }}:buildcache,mode=max
           tags: ${{ env.APP_NAME }}:buildcache
@@ -48,10 +49,10 @@ jobs:
       - name: Test app
         run: make app-test
 
-      - name: Build and push
+      - name: Push to Docker
         uses: docker/build-push-action@v4
         with:
           context: .
           push: true
-          file: Dockerfile.production
+          cache-from: type=registry,ref=${{ env.APP_NAME }}:buildcache
           tags: ${{ steps.meta.outputs.tags }}
