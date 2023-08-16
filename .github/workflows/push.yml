@@ -18,6 +18,7 @@ jobs:
         with:
           images: ${{ env.APP_NAME }}
           tags: |
+            type=ref,event=branch
             type=semver,pattern={{version}}
           flavor: |
             latest=true
