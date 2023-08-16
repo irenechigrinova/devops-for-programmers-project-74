@@ -18,10 +18,8 @@ jobs:
         with:
           images: ${{ env.APP_NAME }}
           tags: |
-            type=ref,event=branch
             type=semver,pattern={{version}}
-          flavor: |
-            latest=true
+            type=semver,pattern=latest
 
       - name: Checkout
         uses: actions/checkout@v3
