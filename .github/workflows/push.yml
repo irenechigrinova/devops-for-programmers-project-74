@@ -46,5 +46,5 @@ jobs:
           push: true
           file: Dockerfile.production
           tags: |
-            ${{ APP_NAME }}:${{ steps.vars.outputs.tag }}
-            ${{ APP_NAME }}:latest
+            ${{ env.APP_NAME }}:${{ steps.vars.outputs.tag }}
+            ${{ env.APP_NAME }}:latest
