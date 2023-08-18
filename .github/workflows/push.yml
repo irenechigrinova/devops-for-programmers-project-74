@@ -37,7 +37,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
       - name: Test app
-        run: make app-test
+        uses: make app-test
         with:
           context: .
           load: true
