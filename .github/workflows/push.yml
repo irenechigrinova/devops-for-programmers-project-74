@@ -36,11 +36,18 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
-      - name: Test app
-        uses: make app-test
+      # без этого шага начинают падать тесты
+      - name: Build Docker Image
+        uses: docker/build-push-action@v4
         with:
           context: .
           load: true
+          cache-from: type=registry,ref=${{ env.APP_NAME }}:buildcache
+          cache-to: type=registry,ref=${{ env.APP_NAME }}:buildcache,mode=max
+          tags: ${{ env.APP_NAME }}:buildcache
+
+      - name: Test app
+        run: make app-test
 
       - name: Push to Docker
         uses: docker/build-push-action@v4
