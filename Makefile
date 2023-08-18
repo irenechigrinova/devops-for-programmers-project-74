@@ -4,7 +4,8 @@ app-test:
 app-run-dev:
 	docker-compose up
 
-app-install:
+app-prepare:
+	cp .env.example .env
 	docker-compose run --rm app npm ci
 
 app-build:
