@@ -36,7 +36,6 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
-      # без этого шага начинают падать тесты
       - name: Build Docker Image
         uses: docker/build-push-action@v4
         with:
