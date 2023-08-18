@@ -1,6 +1,7 @@
 version: '3'
 services:
   app:
+    image: dev
     build:
       context: .
       dockerfile: ./Dockerfile
@@ -8,7 +9,7 @@ services:
       - '8080:8080'
     volumes:
       - ./app:/app
-    command: bash -c 'sleep 10 && npm start'
+    command: bash -c 'sleep 3 && npm start'
 
   caddy:
     image: caddy:alpine
