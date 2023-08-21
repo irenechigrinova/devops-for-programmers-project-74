@@ -10,6 +10,9 @@ services:
     volumes:
       - ./app:/app
     command: bash -c 'sleep 3 && npm start'
+    networks:
+      - app
+      - app-caddy
 
   caddy:
     image: caddy:alpine
@@ -23,7 +26,15 @@ services:
       - caddy_config:/config
     depends_on:
       - app
+    networks:
+      - app-caddy
 
 volumes:
   caddy_data:
   caddy_config:
+
+networks:
+  app-caddy:
+    driver: bridge
+  app:
+    driver: bridge

@@ -13,6 +13,8 @@ services:
     command: bash -c 'sleep 3 && npm test'
     depends_on:
       - db
+    networks:
+      - app
 
   db:
     image: postgres:latest
@@ -24,8 +26,13 @@ services:
       - '5432:5432'
     volumes:
       - pgdata:/var/lib/postgresql/data
+    networks:
+      - app
 
 volumes:
   pgdata:
 
+networks:
+  app:
+    driver: bridge
 
